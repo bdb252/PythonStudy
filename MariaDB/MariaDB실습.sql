@@ -1,4 +1,21 @@
 /*
+MariaDB에서 새로운 데이터베이스 계정 생성하기
+: 오라클에서는 계정만 생성하면 되지만 MySQL(MariaDB)에서는
+새로운 DB와 User(계정)를 동시에 생성한 후 권한설정을 해야 한다. 
+*/
+
+##아래 작업은 root계정으로 접속한 후 실행해야 함
+
+#새로운 데이터베이스 생성
+CREATE DATABASE sample_db;
+#새로운 사용자 계정 생성(로컬에서만 접속할 수 있게 설정)
+CREATE USER 'sample_user'@'localhost' IDENTIFIED BY '1234';
+#sample_db를 사용할 수 있는 모든 권한을 sample_user에게 부여
+GRANT ALL PRIVILEGES ON sample_db.* TO 'sample_user'@'localhost';
+#이 명령을 통해 위에서 설정한 사항을 MariaDB에 적용
+FLUSH PRIVILEGES;
+
+/*
 블럭단위 주석은 Java와 동일하게 작성
 */
 
@@ -13,6 +30,7 @@ ctrl+shift+F9: 현재 쿼리를 실행한다. 단 마지막에 기술한
 	세미콜론 안으로 커서를 옮긴 후 실행해야한다.
 */
 
+##여기부터는 sample_user계정으로 접속한 후 작성
 
 /*
 테이블 생성하기
@@ -32,7 +50,7 @@ CREATE TABLE tb_int(
 	num3 MEDIUMINT DEFAULT '100',
 	num4 BIGINT,
 	
-	fnum1 FLOAT(10,5) NOT NULL,tb_int
+	fnum1 FLOAT(10,5) NOT NULL,
 	fnum2 DOUBLE(20,10)
 );
 
@@ -91,7 +109,7 @@ DESC tb_string;
 
 INSERT INTO tb_string(str1, str2) VALUES ('난 짧은글3','난 엄청 긴글3');
 
-sample_db
+#sample_db
 SELECT * FROM tb_string WHERE idx=2;
 SELECT * FROM tb_string WHERE idx=2; AND str1='난 짧은글2';
 SELECT * FROM tb_string WHERE idx=2; AND str1='난 짧은글3';
@@ -161,4 +179,20 @@ VALUES ('제목5', '내용5입니다','korea',NOW(),0);
 
 SELECT * FROM board;
 
+CREATE TABLE phoneBook(
+	num INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(100) NOT NULL,
+	phonenum VARCHAR(20) NOT NULL,
+	address VARCHAR(100),
+	PRIMARY KEY(num)
+);
+INSERT INTO phoneBook(username, phonenum, address)
+VALUES ('이란이', '01020203030','서울시 마포구');
 
+INSERT INTO phoneBook(username, phonenum, address)
+VALUES ('박진경', '01030304040','서울시 성동구');
+
+INSERT INTO phoneBook(username, phonenum, address)
+VALUES ('구선우', '01029293993','서울시 금천구');
+
+phonebookSELECT * FROM phoneBook;
