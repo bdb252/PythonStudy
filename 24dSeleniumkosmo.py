@@ -12,7 +12,7 @@ driver.get(url)
 driver.find_element(By.XPATH, '//*[@id="header"]/div[1]/div/ul/li[1]/a').click()
 time.sleep(2)
 
-driver.find_element(By.NAME, 'id').send_keys('hanyilee')
+driver.find_element(By.NAME, 'id').send_keys('id')
 time.sleep(2)
 driver.find_element(By.NAME, 'password').send_keys('1234')
 time.sleep(2)

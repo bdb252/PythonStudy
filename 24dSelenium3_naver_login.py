@@ -15,7 +15,7 @@ driver.find_element(By.XPATH, '//*[@id="account"]/div/a/i').click()
 time.sleep(2)
 
 # 로그인 페이지로 이동 후 아이디/비번의 입력상자를 찾은 후 정보입력
-driver.find_element(By.NAME, 'id').send_keys('hanyilee')
+driver.find_element(By.NAME, 'id').send_keys('id')
 time.sleep(2)
 driver.find_element(By.NAME, 'pw').send_keys('1234')
 time.sleep(2)
